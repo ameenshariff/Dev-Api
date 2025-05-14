@@ -1,0 +1,15 @@
+meta {
+  name: Headlines
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{domain}}/top-headlines?country=us
+  body: none
+  auth: inherit
+}
+
+params:query {
+  country: us
+}

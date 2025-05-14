@@ -1,0 +1,13 @@
+auth {
+  mode: apikey
+}
+
+auth:apikey {
+  key: X-Api-Key
+  value: {{process.env.api-key}}
+  placement: header
+}
+vars:pre-request {
+  domain: https://newsapi.org/v2
+  query: apple
+}

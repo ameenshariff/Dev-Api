@@ -1,0 +1,42 @@
+meta {
+  name: Everything
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{domain}}/everything?q={{query}}&searchIn=title&sortBy=popularity
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  q: {{query}}
+  searchIn: title
+  sortBy: popularity
+  ~from: 2025-05-12
+}
+
+body:multipart-form {
+  : @file(/Users/I559983/Documents/MacBook Pro (14-inch, 2024) - Geekbench_GPU.pdf)
+}
+
+assert {
+  res.body.totalResults: gt 10733
+}
+
+script:pre-request {
+  bru.setVar("query","india")
+}
+
+script:post-response {
+  console.log(res.body)
+}
+
+tests {
+  test("should be able to login", function () {
+    const data = res.getBody();
+  //   console.log("Hello");
+    expect(res.getBody().totalResults).to.equal(10733);
+  });
+}
